@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+                <div class="card-header">{{ __('Admin Dashboard') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,7 +16,7 @@
 
                         <a href="{{ route('admin.create') }}" class="btn btn-primary">Add Admin User</a>
 
-                        <table class="table">
+                        <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -25,17 +25,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($admins as $admin)
+                            @foreach($users as $user)
                                 <tr>
-                                    <td>{{ $admin->name }}</td>
+                                    <td>{{ $user->name }}</td>
                                     <td>
-                                        @foreach ($admin->roles as $role)
-                                            {{ $role->name }}
-                                        @endforeach
+                                        <ul>
+                                            @foreach ($user->roles as $role)
+                                                <li>{{ $role->name }}</li>
+                                            @endforeach
+                                        </ul>
                                     </td>
-                                    <td><a href="{{ route('admin.edit', $admin->id ) }}" class="btn btn-warning">Edit</a></td>
+                                    <td><a href="{{ route('admin.edit', $user->id) }}" class="btn btn-warning">Edit</a></td>
                                     <td>
-                                        <form method="post" action="{{ route('admin.destroy', $admin->id ) }}">
+                                        <form method="post" action="{{ route('admin.destroy', $user->id ) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>

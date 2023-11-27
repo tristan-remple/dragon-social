@@ -64,3 +64,27 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Assignment
+
+### PART 1
+- ✅ Create Laravel app
+- ✅ Initialize to Github
+- ✅ Implement Bootstrap UI Auth
+
+### PART 2
+- ✅ Generate tables according to ERD
+- ✅ Generate appropriate models, controllers, and seeders
+- ✅ Seed the Roles table
+- ✅ Seed the Users table
+- ✅ Seed the Role-User pivot table
+- ✅ Reverse-engineer your database ERD (needs tidying)
+
+### PART 3
+- ✅ Admin index view (needs tidying)
+- ✅ Admin create view (needs tidying)
+- Admin edit view
+- Admin soft delete functionality
+- Navigation between those pages
+- Appropriate controller functionality
+
