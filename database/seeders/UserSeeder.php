@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -17,19 +18,19 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Jane UserAdmin',
             'email' => 'jane@example.com',
-            'password' => '$2a$10$SgfxJYuOU2kkoSuJZNl63e/Rpzlz5xz.vrreD7Y.ZO7KKnp77KOPC',
+            'password' => Hash::make('password5'),
             'created_at' => Carbon::now(),
         ]);
         DB::table('users')->insert([
             'name' => 'Bob Moderator',
             'email' => 'bob@example.com',
-            'password' => '$2a$10$SgfxJYuOU2kkoSuJZNl63e/Rpzlz5xz.vrreD7Y.ZO7KKnp77KOPC',
+            'password' => Hash::make('password5'),
             'created_at' => Carbon::now(),
         ]);
         DB::table('users')->insert([
             'name' => 'Susan ThemeAdmin',
             'email' => 'susan@example.com',
-            'password' => '$2a$10$SgfxJYuOU2kkoSuJZNl63e/Rpzlz5xz.vrreD7Y.ZO7KKnp77KOPC',
+            'password' => Hash::make('password5'),
             'created_at' => Carbon::now(),
         ]);
     }

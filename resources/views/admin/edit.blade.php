@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Edit Admin') }}</div>
+                <div class="card-header"><b>{{ __('Edit Admin') }}</b></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,20 +16,21 @@
 
                     <form method="post" action="{{ route('admin.update', $user->id) }}">
                         @csrf
+                        @method('PUT')
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="name" class="form-label"><b>Name</b></label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?? $user->name }}">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label"><b>Email</b></label>
                             <input type="email" class="form-control" id="email" name="email" value="{{ old('email') ?? $user->email }}">
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">New Password</label>
+                            <label for="password" class="form-label"><b>New Password</b></label>
                             <input type="password" class="form-control" id="password" name="password">
                         </div>
 
-                        <label for="roles" class="form-label">Roles</label>
+                        <label for="roles" class="form-label"><b>Roles</b></label>
                         <ul class="list-group" id="roles">
                             @foreach($roles as $role)
                                 <li class="list-group-item">
@@ -39,7 +40,9 @@
                                         name="roles[]"
                                         id="{{ $role->id }}"
                                         value="{{ $role->id }}"
-                                        @if( in_array($role, $user->roles) )
+                                        @if (is_array(old('roles')) && in_array($role->id, old('roles')))
+                                            checked
+                                        @elseif (!is_array(old('roles')) && $user->roles->contains($role) )
                                             checked
                                         @endif
                                     >

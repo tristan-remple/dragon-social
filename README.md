@@ -83,8 +83,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ### PART 3
 - ✅ Admin index view (needs tidying)
 - ✅ Admin create view (needs tidying)
-- Admin edit view
-- Admin soft delete functionality
-- Navigation between those pages
-- Appropriate controller functionality
-
+- ✅ Admin edit view
+- ✅ Admin soft delete functionality
+- ✅ Navigation between those pages
+- ✅ Appropriate controller functionality

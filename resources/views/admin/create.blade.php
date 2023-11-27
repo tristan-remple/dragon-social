@@ -33,7 +33,16 @@
                         <ul class="list-group" id="roles">
                             @foreach($roles as $role)
                                 <li class="list-group-item">
-                                    <input class="form-check-input me-1" type="checkbox" name="roles[]" id="{{ $role->id }}" value="{{ $role->id }}">
+                                    <input
+                                        class="form-check-input me-1"
+                                        type="checkbox"
+                                        name="roles[]"
+                                        id="{{ $role->id }}"
+                                        value="{{ $role->id }}"
+                                        @if (is_array(old('roles')) && in_array($role->id, old('roles')))
+                                            checked
+                                        @endif
+                                    >
                                     <label for="{{ $role->id }}" class="form-label">{{ $role->name }}</label>
                                 </li>
                             @endforeach
