@@ -13,6 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    // softdeletes means that delete() only modifies the record instead of destroying it
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
@@ -46,6 +47,7 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // relationships need to be defined here in order to be queried
     function roles() : BelongsToMany {
         return $this->belongsToMany(Role::class);
     }

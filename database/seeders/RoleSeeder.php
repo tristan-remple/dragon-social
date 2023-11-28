@@ -14,6 +14,8 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        // seed 3 role names with timestamps
+        // description is left null
         DB::table('roles')->insert([
             'name' => 'User Administrator',
             'created_at' => Carbon::now(),

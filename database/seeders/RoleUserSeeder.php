@@ -14,14 +14,17 @@ class RoleUserSeeder extends Seeder
      */
     public function run(): void
     {
+        // get the users that were already seeded
         $jane = DB::table('users')->where('name', 'Jane UserAdmin')->first();
         $bob = DB::table('users')->where('name', 'Bob Moderator')->first();
         $susan = DB::table('users')->where('name', 'Susan ThemeAdmin')->first();
 
+        // get the roles that were already seeded
         $user_admin = DB::table('roles')->where('name', 'User Administrator')->first();
         $moderator = DB::table('roles')->where('name', 'Moderator')->first();
         $theme_manager = DB::table('roles')->where('name', 'Theme Manager')->first();
 
+        // match users to roles
         DB::table('role_user')->insert([
             'user_id' => $jane->id,
             'role_id' => $user_admin->id

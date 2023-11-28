@@ -15,6 +15,8 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        // add 3 records to the users table
+        // making use of Hash for hashing and Carbon for timestamps
         DB::table('users')->insert([
             'name' => 'Jane UserAdmin',
             'email' => 'jane@example.com',
