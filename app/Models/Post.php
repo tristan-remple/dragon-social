@@ -11,7 +11,11 @@ class Post extends Model
 {
     use HasFactory, SoftDeletes;
 
-    function user() : BelongsTo {
-        return $this->belongsTo(User::class);
+    function creator() : BelongsTo {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    function deleter() : BelongsTo {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 }

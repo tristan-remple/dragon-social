@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,7 +13,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // get all posts in chronological order
+        // return that data with the index view
+        $posts = Post::orderBy('created_at', 'desc')->with('creator')->get();
+        $moderator = Role::where('name', 'Moderator')->first();
+        return(view('posts.index', compact(['posts', 'moderator'])));
     }
 
     /**

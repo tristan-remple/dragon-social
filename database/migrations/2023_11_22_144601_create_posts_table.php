@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('img_filename')->nullable();
+            $table->string('alt')->nullable();
             $table->string('content');
             $table->foreignId('created_by');
             $table->foreignId('deleted_by')->nullable();

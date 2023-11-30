@@ -65,7 +65,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Assignment
+## Assignment Phase 1
 
 ### PART 1
 - ✅ Create Laravel app
@@ -87,3 +87,28 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - ✅ Admin soft delete functionality
 - ✅ Navigation between those pages
 - ✅ Appropriate controller functionality
+
+## Assignment Phase 2
+
+### PART 1
+- ✅ Public posts page
+- ✅ Date display and sorting
+- ✅ Create post button for users only
+- ✅ Edit and delete button for own posts
+- ✅ Moderator can delete
+
+### PART 2
+- Create post page
+- Edit post page
+- Soft delete functionality
+
+### PART 3
+- Middleware to prevent enduser access to moderation pages
+- Redirect and flash message when access is denied
+
+### PART 4
+- Admin link in top bar for user admin
+
+### OPTIONAL / RECOMMENDED
+- redirect from base domain to domain/home
+- ✅ post seeder
