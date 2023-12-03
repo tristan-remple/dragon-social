@@ -98,9 +98,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - ✅ Moderator can delete
 
 ### PART 2
-- Create post page
-- Edit post page
-- Soft delete functionality
+- ✅ Create post page
+- ✅ Edit post page
+- ✅ Soft delete functionality
 
 ### PART 3
 - Middleware to prevent enduser access to moderation pages

@@ -21,7 +21,7 @@
                     @foreach ($posts as $post)
                         <div class="card mb-1">
                             <div class="card-header">
-                                {{ $post->title }}<br />
+                                <a href="{{route('posts.show', $post->id)}}">{{ $post->title }}</a><br />
                                 <small class="text-muted text-end">
                                     {{ $post->creator->name }},
                                     {{ Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
