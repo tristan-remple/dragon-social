@@ -56,6 +56,7 @@ class PostController extends Controller
         $newPost = new Post();
 
         // apply request fields and created by user to the new post
+        // content is a reserved keyword so it has this aggressively flagged as an error
         $newPost->title = $request->title;
         $newPost->content = $request->content;
         if ($request->alt) {
