@@ -29,12 +29,14 @@
                             </div>
 
                             <div class="card-body">
-                                <div class="text-center">
-                                    <img src="{{ asset('storage/img/'.$post->img_filename) }}" alt="{{ $post->alt }}" class="mw-100 object-fit-cover">
-                                </div>
+                                @if ($post->img_filename)
+                                    <div class="text-center">
+                                        <img src="{{ asset('storage/img/'.$post->img_filename) }}" alt="{{ $post->alt }}" class="mw-100 object-fit-cover">
+                                    </div>
+                                @endif
                                 <p class="card-text">{{ $post->content }}</p>
-
                             </div>
+
                             <div class="card-body row">
                                 <div class="col-sm d-flex">
                                     @if (Auth::check() && $post->creator->id === Auth::user()->id)

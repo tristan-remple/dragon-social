@@ -11,6 +11,11 @@ use Illuminate\Validation\Rules\File;
 
 class PostController extends Controller
 {
+    // require users to be signed in to access routes other than index and show
+    function __construct() {
+        $this->middleware(['auth'])->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -18,6 +23,7 @@ class PostController extends Controller
     {
         // get all posts in chronological order
         // return that data with the index view
+        // the moderator role is passed in for logic around the delete button
         $posts = Post::orderBy('created_at', 'desc')->with('creator')->get();
         $moderator = Role::where('name', 'Moderator')->first();
         return(view('posts.index', compact(['posts', 'moderator'])));
@@ -36,6 +42,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // posts must have a title and content
+        // if there's an image uploaded, it has to actually be an image
         $request->validate([
             'title' => ['required'],
             'content' => ['required'],
@@ -44,8 +52,10 @@ class PostController extends Controller
             ]
         ]);
 
+        // create a new post
         $newPost = new Post();
 
+        // apply request fields and created by user to the new post
         $newPost->title = $request->title;
         $newPost->content = $request->content;
         if ($request->alt) {
@@ -53,6 +63,7 @@ class PostController extends Controller
         }
         $newPost->created_by = Auth::id();
 
+        // if an image was uploaded, rename the file, move it to storage, and save the new filename to the post
         // https://codesource.io/complete-laravel-8-image-upload-tutorial-with-example/
         if($request->file('image')){
             $file= $request->file('image');
@@ -61,8 +72,10 @@ class PostController extends Controller
             $newPost['img_filename']= $filename;
         }
 
+        // save the post
         $newPost->save();
 
+        // return the posts index view with a success message
         return redirect(route('posts.index'))->with('status', 'Post added successfully');
 
     }
@@ -72,6 +85,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // post is put in an array so we can easily reuse the index view
+        // lazy way out but it works in this context
+        // again, moderator is supplied for delete permission purposes
         $posts = [$post];
         $moderator = Role::where('name', 'Moderator')->first();
         return(view('posts.index', compact(['posts', 'moderator'])));
@@ -82,7 +98,14 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts/edit', compact('post'));
+        // while users have to be signed in to get past the middleware
+        // i also want the user to be the same one who made the post
+        if (Auth::id() === $post->created_by){
+            return view('posts/edit', compact('post'));
+        } else {
+            return redirect(route('posts.index'))->with('status', 'You cannot edit other users\' posts.');
+        }
+
     }
 
     /**
@@ -90,6 +113,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        // same validation rules as create
         $request->validate([
             'title' => ['required'],
             'content' => ['required'],
@@ -98,6 +122,7 @@ class PostController extends Controller
             ]
         ]);
 
+        // also the same as create, except we're using the post parameter instead of making a new one
         $post->title = $request->title;
         $post->content = $request->content;
         if ($request->alt) {
@@ -105,7 +130,6 @@ class PostController extends Controller
         }
         $post->created_by = Auth::id();
 
-        // https://codesource.io/complete-laravel-8-image-upload-tutorial-with-example/
         if($request->file('image')){
             $file= $request->file('image');
             $filename= date('YmdHi').'_'.$file->getClientOriginalName();
@@ -123,8 +147,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        // since this isn't a get route, it can't be accessed unless the button is there
+        // so i don't believe we need additional safeguards here
+
+        // delete (soft delete enabled)
         $post->delete();
 
+        // save the id of the user who deleted
         $post->deleted_by = Auth::id();
         $post->save();
 

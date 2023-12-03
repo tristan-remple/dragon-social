@@ -27,9 +27,13 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Current Image</label>
-                            <div class="text-center">
-                                <img src="{{ asset('storage/img/'.$post->img_filename) }}" alt="{{ $post->alt }}" class="mw-100 object-fit-cover">
-                            </div>
+                            @if ($post->img_filename)
+                                <div class="text-center">
+                                    <img src="{{ asset('storage/img/'.$post->img_filename) }}" alt="{{ $post->alt }}" class="mw-100 object-fit-cover">
+                                </div>
+                            @else
+                                <p>This post has no image.</p>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">New Image (Optional)</label>

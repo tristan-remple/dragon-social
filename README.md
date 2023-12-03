@@ -103,12 +103,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - ✅ Soft delete functionality
 
 ### PART 3
-- Middleware to prevent enduser access to moderation pages
-- Redirect and flash message when access is denied
+- ✅ Middleware to prevent enduser access to moderation pages
+- ✅ Redirect and flash message when access is denied
 
 ### PART 4
-- Admin link in top bar for user admin
+- ✅ Admin link in top bar for user admin
 
 ### OPTIONAL / RECOMMENDED
-- redirect from base domain to domain/home
+- ✅ redirect from base domain to domain/home
 - ✅ post seeder

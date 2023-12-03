@@ -13,12 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('index');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/admin', \App\Http\Controllers\AdminController::class);
+Route::get('/home', [App\Http\Controllers\PostController::class, 'index'])->name('home');
+Route::resource('/admin', \App\Http\Controllers\AdminController::class)->middleware(['auth', 'checkAdmin']);
 Route::resource('/posts', \App\Http\Controllers\PostController::class);
